@@ -33,6 +33,18 @@ class App extends React.Component {
     this.setState({ message: "You have been entered!" });
   };
 
+  onClick = async () =>{
+    const accounts = await web3.eth.getAccounts();
+
+    this.setState({message: 'Waiting on tranction success...'});
+
+    await lottery.methods.pickPlayer().send({
+      from: accounts[0]
+    });
+
+    this.setState({ message: 'A winner has been picked!'})
+  }
+
   render() {
     return (
       <div>
@@ -43,7 +55,7 @@ class App extends React.Component {
           {web3.utils.fromWei(this.state.balance, "ether")} ether!
         </p>
         <hr />
-        <from onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit}>
           <h4>Want try your luck?</h4>
           <div>
             <label>Amount of ether to enter </label>
@@ -54,7 +66,12 @@ class App extends React.Component {
             />
           </div>
           <button>ENTER</button>
-        </from>
+        </form>
+        <hr />
+
+        <h4>Ready to pick a winner</h4>
+        <button onClick={this.onClick}> Pick Winner</button>
+
         <hr />
         <h1>{this.state.message}</h1>
       </div>
