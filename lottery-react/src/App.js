@@ -9,7 +9,7 @@ class App extends React.Component {
     players: [],
     balance: "",
     value: "",
-    massage: "",
+    message: "",
   };
 
   async componentDidMount() {
@@ -49,7 +49,7 @@ class App extends React.Component {
             <label>Amount of ether to enter </label>
             <input
               value={this.state.value}
-              onChange={(event) => this.setState({ valueL: event.target.value })
+              onChange={(event) => this.setState({ value: event.target.value })
               }
             />
           </div>
