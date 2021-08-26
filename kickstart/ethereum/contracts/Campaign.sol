@@ -1,13 +1,13 @@
 pragma solidity ^0.4.17;
 
-contract CampaignFactory {
+contract campaignFactory{
     address[] public deployedCampaigns;
-
+    
     function createCampaign(uint minimum) public {
         address newCampaign = new Campaign(minimum, msg.sender);
         deployedCampaigns.push(newCampaign);
     }
-
+    
     function getDeployedCampaigns() public view returns (address[]) {
         return deployedCampaigns;
     }
@@ -76,5 +76,21 @@ contract Campaign {
 
         request.recipient.transfer(request.value);
         request.complete = true;
+    }
+    
+    function getSummary() public view returns(
+        uint,uint,uint,uint,address
+        ){
+        return (
+            minimumContribution,
+            this.balance,
+            requests.length,
+            approversCount,
+            manager
+            );
+    }
+    
+    function getRequistsCount() public view returns(uint) {
+        return requests.length;
     }
 }
