@@ -1,3 +1,3 @@
-const routes = require('next-routes')();
+const routes = require("next-routes")();
 
-module.export = routes;
+module.exports = routes;

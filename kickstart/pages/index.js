@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Card, Button } from "semantic-ui-react";
 import factory from "../ethereum/factory";
 import Layout from "../components/Layout";
+import { Link } from "../route";
 
 class CampaignIndex extends Component {
   static async getInitialProps() {
@@ -30,17 +31,20 @@ class CampaignIndex extends Component {
   render() {
     return (
       <Layout>
-      <div>
-
-        <h3>Open Campaign</h3>
-        <Button
-        floated="right"
-        content="Create Campaign"
-        icon="add"
-        primary
-        />
-        {this.renderCampaigns()}
-      </div>
+        <div>
+          <h3>Open Campaign</h3>
+          <Link route="/campaigns/new">
+            <a>
+              <Button
+                floated="right"
+                content="Create Campaign"
+                icon="add"
+                primary
+              />
+            </a>
+          </Link>
+          {this.renderCampaigns()}
+        </div>
       </Layout>
     );
   }
