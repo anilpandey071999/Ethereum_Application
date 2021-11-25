@@ -11,7 +11,7 @@ class CampaignShow extends Component {
     const campaign = Campaign(props.query.address);
 
     const summary = await campaign.methods.getSummary().call();
-
+console.log(summary);
     return {
       address: props.query.address,
       minimumContribution: summary[0],
@@ -19,6 +19,7 @@ class CampaignShow extends Component {
       requestsCount: summary[2],
       approversCount: summary[3],
       manager: summary[4],
+      name:summary[5]
     };
   }
 
@@ -29,6 +30,7 @@ class CampaignShow extends Component {
       minimumContribution,
       requestsCount,
       approversCount,
+      name,
     } = this.props;
 
     const items = [
@@ -62,6 +64,12 @@ class CampaignShow extends Component {
         meta: "Campaign Balance (ether)",
         description:
           "The balance is how much money this campaign has left to spend.",
+      },
+      {
+        header: name,
+        meta: "Campaign Manager",
+        // description:
+        //   "The balance is how much money this campaign has left to spend.",
       },
     ];
 
