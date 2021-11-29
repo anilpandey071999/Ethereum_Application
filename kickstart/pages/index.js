@@ -12,20 +12,40 @@ import { Link } from "../route";
 
 class CampaignIndex extends Component {
   static async getInitialProps() {
+    // const cam = await factory.
     const campaigns = await factory.methods.getDeployedCampaigns().call();
+    console.log(campaigns.length);
+    const requests = await Promise.all(
+      Array(campaigns.length )
+        .fill()
+        .map((element, index) => {
+          return factory.methods.campaignDetails(index).call();
+        })
+    );
+    console.log(
+      "cam",
+      
+      // await factory.methods.campaignDetails(0).call(),
+      await Array(parseInt(campaigns.length - 1))
+        .map( (elemnet, index) => {
+          factory.methods.campaignDetails(index).call() 
+        })
+    );
     console.log(campaigns);
-    return { campaigns };
+    return { campaigns ,requests};
   }
 
   renderCampaigns() {
-    const items = this.props.campaigns.map((address) => {
+    console.log(this.props.requests);
+    const items = this.props.requests.map((address,index) => {
       return {
-        header: address,
+        header: address[1],
         description: (
-          <Link route={`/campaigns/${address}`}>
+          <Link route={`/campaigns/${address[0]}`}>
             <a>View Campaign</a>
           </Link>
         ),
+        meta:address[0],
         fluid: true,
       };
     });

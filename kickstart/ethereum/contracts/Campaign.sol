@@ -2,10 +2,20 @@ pragma solidity ^0.4.17;
 
 contract campaignFactory{
     address[] public deployedCampaigns;
-    
+    struct CampaignDetails{
+        address deployedCampaignsAddress;
+        string name;
+    }
+    CampaignDetails[] public campaignDetails;
+
     function createCampaign(uint minimum, string name) public {
-        address newCampaign = new Campaign(minimum, msg.sender,name);
-        deployedCampaigns.push(newCampaign);
+        CampaignDetails memory newCampaignDetails = CampaignDetails({
+            deployedCampaignsAddress:new Campaign(minimum, msg.sender,name),
+            name: name
+        });
+        campaignDetails.push(newCampaignDetails);
+        // address newCampaign = new Campaign(minimum, msg.sender,name);
+        deployedCampaigns.push(newCampaignDetails.deployedCampaignsAddress);
     }
     
     function getDeployedCampaigns() public view returns (address[]) {
