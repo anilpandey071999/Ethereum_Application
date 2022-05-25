@@ -16,11 +16,11 @@ beforeEach(async () => {
 
   factory = await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
     .deploy({ data: compiledFactory.bytecode })
-    .send({ from: accounts[0], gas: "1000000" });
+    .send({ from: accounts[0], gas: "5000000" });
 
-  await factory.methods.createCampaign("100").send({
+  await factory.methods.createCampaign("100","Testing").send({
     from: accounts[0],
-    gas: "1000000",
+    gas: "5000000",
   });
 
   [campaignAddress] = await factory.methods.getDeployedCampaigns().call();
@@ -96,7 +96,6 @@ describe("Campaigns", () => {
     let balance = await web3.eth.getBalance(accounts[1]);
     balance = web3.utils.toWei(balance, 'ether');
     balance = parseFloat(balance);
-    console.log(balance);
     assert(balance > 104); 
   });
 });

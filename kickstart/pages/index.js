@@ -11,6 +11,7 @@ import Layout from "../components/Layout";
 import { Link } from "../route";
 
 class CampaignIndex extends Component {
+  
   static async getInitialProps() {
     // const cam = await factory.
     const campaigns = await factory.methods.getDeployedCampaigns().call();
