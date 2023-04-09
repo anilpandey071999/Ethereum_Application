@@ -15,15 +15,17 @@ class ContributeForm extends Component {
     event.preventDefault();
 
     const campaign = Campaign(this.props.address);
+    console.log("address:- ",this.props.address);
 
     this.setState({ load:true });
 
     try {
       const accounts = await web3.eth.getAccounts();
-      await campaign.methods.contribute().send({
+      const contribute = await campaign.methods.contribute().send({
         from: accounts[0],
         value: web3.utils.toWei(this.state.value, "ether"),
       });
+      await contribute.wait()
       Router.replaceRoute(`/campaigns/${this.props.address}`);
     } catch (err) {
       this.setState({ errMassage: err.message });

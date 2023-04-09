@@ -90,9 +90,7 @@ console.log(summary);
           <Grid.Row>
             <Grid.Column>
               <Link route={`/campaigns/${this.props.address}/requests`}>
-                <a>
                   <Button primary>View Requests</Button>
-                </a>
               </Link>
             </Grid.Column>
           </Grid.Row>

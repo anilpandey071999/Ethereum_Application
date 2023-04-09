@@ -43,7 +43,7 @@ class CampaignIndex extends Component {
         header: address[1],
         description: (
           <Link route={`/campaigns/${address[0]}`}>
-            <a>View Campaign</a>
+            View Campaign
           </Link>
         ),
         meta:address[0],
@@ -59,14 +59,12 @@ class CampaignIndex extends Component {
         <div>
           <h3>Open Campaign</h3>
           <Link route="/campaigns/new">
-            <a>
               <Button
                 floated="right"
                 content="Create Campaign"
                 icon="add"
                 primary
               />
-            </a>
           </Link>
           {this.renderCampaigns()}
         </div>

@@ -30,9 +30,11 @@ class RequestNew extends Component {
 
     try {
       const accounts = await web3.eth.getAccounts();
-      await campaign.methods
+      const createRequest = await campaign.methods
         .createRequest(description, web3.utils.toWei(value, "ether"), recipient)
         .send({ from: accounts[0] });
+        await createRequest.wait()
+        console.log("Done");
       Router.pushRoute(`/campaigns/${this.props.address}/requests`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
@@ -44,9 +46,7 @@ class RequestNew extends Component {
     return (
       <Layout>
         <Link route={`/campaigns/${this.props.address}/requests`}>
-          <a>
            Back
-          </a>
         </Link>
         <h3>Create a Request</h3>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
